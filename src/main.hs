@@ -5,7 +5,7 @@ import Euterpea
 
 main =
   -- play $ times 3 instrumentSample
-  play bottomRow
+  play $ bottomRow :=: middleRow
 
 instrumentSample =
   topSample :=: bottomSample
@@ -19,14 +19,18 @@ bottomSample =
   g 3 en :+: g 3 en :+: g 3 en :+: g 3 en :+:
   g 3 en :+: g 3 en :+: a 3 en
 
+middleRow =
+  instrument Sitar $
+  avgNote (g, 3, en) 8 [0,1,2,3,4,5,6,7] en
 
 bottomRow =
   instrument Woodblock $
-  avgNote (c, 4, en) 8 [0,1,2,3,4,5,6,7]
+  avgNote (c, 4, en) 8 [0,1,2,3,4,5,6,7] 0.0
 
 -- avgNote :: (b -> GHC.Real.Ratio Integer -> Music a, b, GHC.Real.Ratio Integer) -> Dur -> [Dur] -> Dur -> Music a
-avgNote (n, o, nl) al [x,y] = n o nl :+: getRest y al nl :+: n o nl
-avgNote (n, o, nl) al (x:y:ys) = n o nl :+: getRest x y nl :+: avgNote (n, o, nl) al (y:ys)
+avgNote (n, o, nl) al list off = rest off :+: avgNote' (n, o, nl) al list
+avgNote' (n, o, nl) al [x,y] = n o nl :+: getRest y al nl :+: n o nl
+avgNote' (n, o, nl) al (x:y:ys) = n o nl :+: getRest x y nl :+: avgNote' (n, o, nl) al (y:ys)
 
 -- getRest :: Dur -> Dur -> Dur -> Music a
 getRest current next dur =
