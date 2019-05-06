@@ -13,8 +13,8 @@ main = do
 getDisplay (m1 :=: m2) = generateRow m1 ++ "\n" ++ getDisplay m2
 getDisplay m = generateRow m
 
-generateRow modify control a = "instrument" ++ generateRow n
-generateRow (n1 :+: n) = "X" ++ generateRow n2
+-- generateRow modify control a = "instrument" ++ generateRow n
+generateRow (n1 :+: n) = "X" ++ generateRow n1
 generateRow n2 = "O"
 
 
