@@ -15,3 +15,8 @@ Look up:
 - Euterpea Music types
 - get length
 - learn ghci flags
+
+Euterpea:
+- visualize music
+  - extract instument
+- play percussive sounds

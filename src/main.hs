@@ -3,21 +3,24 @@ import Functions
 import Helpers
 import Euterpea
 
-main =
+main = do
   -- play $ times 3 instrumentSample
-  play $ bottomRow :=: middleRow
+  let music = topRow :=: bottomRow :=: middleRow
+  let musicString = getDisplay music
+  putStrLn musicString
+  play $ music
 
-instrumentSample =
-  topSample :=: bottomSample
+getDisplay (m1 :=: m2) = generateRow m1 ++ "\n" ++ getDisplay m2
+getDisplay m = generateRow m
 
-topSample =
-  instrument Sitar $
-  c 4 qn :+: c 4 qn :+: d 4 qn :+: c 4 qn
+generateRow modify control a = "instrument" ++ generateRow n
+generateRow (n1 :+: n) = "X" ++ generateRow n2
+generateRow n2 = "O"
 
-bottomSample =
-  instrument Woodblock $
-  g 3 en :+: g 3 en :+: g 3 en :+: g 3 en :+:
-  g 3 en :+: g 3 en :+: a 3 en
+
+topRow =
+  instrument Tuba $
+  avgNote (g, 3, en) 8 [0,1,2,3,4,5,6,7] den
 
 middleRow =
   instrument Sitar $
