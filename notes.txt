@@ -13,3 +13,5 @@ module, where, import
 Look up:
 - ghc compiler flags
 - Euterpea Music types
+- get length
+- learn ghci flags
